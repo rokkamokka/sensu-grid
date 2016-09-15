@@ -1,0 +1,22 @@
+[Unit]
+Description=Sensu-grid
+
+[Service]
+WorkingDirectory=/opt/sensu-grid/
+PIDFile=/opt/sensu-grid/pid
+User=sensu-grid
+Group=sensu-grid
+ExecStart=/opt/sensu-grid/bin/gunicorn \
+    -n sensu-grid \
+    --reload \
+    --pid /opt/sensu-grid/pid \
+    --workers 3 \
+    --bind 0.0.0.0:5000 \
+    --log-file /var/log/sensu-grid.log \
+    --log-level info \
+    --access-logfile /var/log/sensu-grid.log \
+    --error-logfile /var/log/sensu-grid.log \
+    sensugrid:app
+
+[Install]
+WantedBy=multi-user.target
