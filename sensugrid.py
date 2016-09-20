@@ -147,6 +147,21 @@ def icon_for_event(event):
 
     return 'question-circle'
 
+@app.template_filter('color_for_grid_item')
+def color_for_grid_item(item_values):
+    if len(item_values) == 0:
+        return 'green'
+    if min(item_values) == -1:
+        return 'purple'
+
+    max_value = max(item_values)
+    if max_value == 2:
+        return 'red'
+    if max_value == 1:
+        return 'yellow'
+    
+    return 'gray'
+
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0',
