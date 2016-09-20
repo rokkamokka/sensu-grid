@@ -17,6 +17,7 @@ ExecStart=/opt/sensu-grid/bin/gunicorn \
     --access-logfile /var/log/sensu-grid.log \
     --error-logfile /var/log/sensu-grid.log \
     sensugrid:app
+ExecStop=/bin/kill -s TERM $MAINPID
 
 [Install]
 WantedBy=multi-user.target
